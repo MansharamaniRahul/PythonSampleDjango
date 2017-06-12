@@ -1,0 +1,46 @@
+<div layout="column"  id='filters' >
+	<div flex='30'>
+		<h4 class='topicsHeading'>  
+		</h4>
+	</div>
+	<div flex='60' style='height: 500px;max-height: 420px;overflow-y:auto;'>
+
+    <table  class="table ">
+      <tr>
+        <th  ng-repeat="column in tableColumns" style='padding:10px;'>{{column}}</th>
+      </tr>
+      <tr ng-repeat="x in finalData  | startFrom:curPage*pageSize | limitTo:pageSize">
+        <td ng-repeat="column in tableColumns" >{{x[column]}}</td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div flex='30'>
+    <div class="mui-panel pagination" ng-show="finalData.length">
+      <div class="mui--pull-left pad10" style='padding:10px '>
+        Items Per Page
+        <select class="pagiSelector ml-5" ng-model="selected_id"
+        ng-options="o.id as o.name for o in pagesizeArray"
+        ng-init="selected_id=10" ng-change="onSelected(selected_id)">
+      </select>
+      of {{finalData.length}}
+    </div>
+    <div class="mui--pull-right pad10 mt-10" style='padding:10px '>
+      <button  title="Prev" ng-disabled="curPage == 0" ng-click="curPage == 0 ? '':curPage=curPage-1">Previous page</button>
+      <span class="pCount"> Page <input type="text" ng-disabled = 'true'
+        value="{{curPage + 1}}"> of {{ numberOfPages() }}
+      </span>
+      <button 
+      title="Next" 
+      ng-disabled="curPage >= finalData.length/pageSize - 1" 
+      ng-click="curPage >= finalData.length/pageSize - 1 ? '' :curPage = curPage+1">Next Page</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+

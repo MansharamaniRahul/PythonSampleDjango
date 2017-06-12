@@ -1,0 +1,103 @@
+<div layout="column"  id='filters' >
+	<div flex='30'>
+		<h4 class='topicsHeading'>
+			Select Filters.
+		</h4>
+	</div>
+	<div flex='60'>
+    <table  class="table table-striped">
+      <tr>
+        <th >Column Name</th>
+        <th>Condition</th>
+        <th>Expected Value</th>
+        <th>Add Filter</th>
+        <th>Delete Filter</th>
+        <th>Clear Filter</th>
+      </tr>
+
+      <tr ng-repeat='row in filtersList track by $index'>
+        <td colspan='6'>
+          <table width='100%'>
+            <tr>
+              <td >
+               <md-autocomplete flex  
+               ng-disabled='row.isDisabled'   
+               md-selected-item="row.column"   
+               md-selected-item-change='columnSelected(row);'              
+               md-search-text="searchColumnName"               
+               md-items="item in querySearchedColumnName(searchColumnName)"
+               md-item-text="item"
+               md-min-length="1"
+               md-floating-label="Select Column Name">
+               <md-item-template>
+                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+              </md-item-template>
+              <md-not-found>
+                No states matching "{{row.searchColumnName}}" were found.
+              </md-not-found>
+            </md-autocomplete>
+          </td>
+          <td >
+            <md-autocomplete flex    
+            ng-disabled='row.isDisabled'     
+            md-selected-item="row.condition"             
+            md-search-text="searchCondition"            
+            md-items="item in querySearchedCondition(searchCondition)"
+            md-item-text="item.displayvalue"
+            md-min-length="1"
+            md-floating-label="Select Condition">
+            <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.displayvalue}}</span>
+            </md-item-template>
+            <md-not-found>
+              No states matching "{{row.searchCondition}}" were found.
+            </md-not-found>
+          </md-autocomplete>
+        </td>
+        <td >
+          <md-input-container ng-show="row.dataType!='timestamp'">
+            <label>{{row.placeholder}}</label>
+            <input   type="text" ng-model="row.filterValue" >           
+          </md-input-container>
+          
+          <md-datepicker ng-if="row.dataType=='timestamp'" placeholder='{{row.placeholder}}' ng-change='onDateSelected($event,row)' ng-model="row.filterValue" ng-keypress='dateFilter($event,row);'></md-datepicker>                 
+          
+        </td>
+        <td >
+          <md-button aria-label="Twitter" class="md-fab md-mini ripple "
+          ng-click='addDeleteRow("add",row)'>
+          <i class="material-icons">add</i>
+        </md-button>
+      </td>
+      <td >
+       <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple " ng-hide='$index==0'
+       ng-click='addDeleteRow("delete",row)'>
+       <i class="material-icons">delete</i>
+     </md-button>
+   </td>    
+   <td >
+     <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple " 
+     ng-click='clearRow(row)'>
+     <i class="material-icons">clear_all</i>
+   </md-button>
+ </td>    
+</tr>
+<tr ng-if='row.errorMessage.length>0'>
+  <td class='errorMessage' colspan='6'>{{row.errorMessage}}</td>
+</tr>
+
+</table>
+</td>   
+</tr>
+</table>
+</div>
+<div flex='10'>
+  <md-button  class="md-primary ripple " ng-click='createFileters();'>
+   Save Filters
+ </md-button>
+</div>
+</div>
+</div>
+
+
+

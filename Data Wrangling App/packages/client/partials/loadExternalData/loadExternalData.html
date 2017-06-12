@@ -1,0 +1,64 @@
+<div layout="row" style='width: 390px; padding: 10px; ' >
+  <div layout='column' layout-align="space-around start" style='width: 95%;'>
+
+    <div layout='row' style="padding:10px;"  > 
+      <div >
+        <md-checkbox ng-model="data.csv" >
+          CSV Format
+        </md-checkbox>
+      </div>
+      <div style="padding-left:80px;">
+       <md-checkbox ng-model="data.json" >
+        JSON Format
+      </md-checkbox>
+    </div>
+  </div>
+  <div layout='row'>
+    <md-input-container>
+      <label>Table Name</label>
+      <input type="text" ng-model="data.tableName">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Enter External URl</label>
+      <input type="text" ng-model="data.externalURL">
+    </md-input-container>
+
+  </div>
+
+  <div layout='row'  ng-if='data.json' layout-align="space-around center " style="padding:10px;" > 
+    <div >
+     <md-input-container >
+      <label>Enter Functions</label>
+      <input type="text" ng-model="data.mongoFntcn">
+    </md-input-container>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div layout='row'  style="padding:10px;"> 
+  <div>
+   <md-dialog-actions>
+     <md-button ng-click="uploadFile()" class="md-primary">
+      Upload 
+    </md-button>
+  </md-dialog-actions>
+</div>
+<div  style="padding-left:80px;">
+ <md-dialog-actions>
+   <md-button ng-click="closeDialog()" class="md-primary">
+    Close Dialog
+  </md-button>
+</md-dialog-actions>
+</div>
+</div>
+
+
+</div>
+</div>
+

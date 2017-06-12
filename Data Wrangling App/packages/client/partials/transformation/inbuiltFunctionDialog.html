@@ -1,0 +1,23 @@
+<div layout="row" style='width:900px;height:100%;padding-top:20px; padding-left: 10px;padding-bottom: 20px; ' >
+	<div flex='100'>
+
+    <div class="md-accordion1" ng-repeat="data in accordianData">
+      <div  ng-init="data.expanded = false" ng-click="collapseAll(data)">
+        <div class="demo">          
+          <span>{{data.heading}}</span>          
+          <span flex=""></span>
+          <span ng-class="{expandCollapse:true, active:data.expanded}"></span> 
+        </div>
+      </div>      
+      <div ng-class="{dataContent:true, activeContent:data.expanded}">
+       <md-chips ng-model="data.content"  readonly="true" md-removable="false" >
+        <md-chip-template  ng-click='currChipClicked($chip);'>
+          <strong>{{$chip.name}}</strong>               
+        </md-chip-template>
+      </md-chips>
+    </div>
+    <div>
+
+    </div>
+    
+  </div>

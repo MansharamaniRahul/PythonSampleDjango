@@ -1,0 +1,12 @@
+<div layout="row"  layout-align="space-between center" style="padding-bottom: 32px;" class="tilesHomePage" >
+
+	<md-whiteframe class="md-whiteframe-20dp box"  flex-gt-md="25" layout layout-align="center center"
+	ng-repeat='tile in tiles'>
+	<a ui-sref="{{tile.state}}"> <span> <i class="material-icons " >{{tile.name}}</i><br/><br/>{{tile.displayValue}}</span>
+	</a>
+</md-whiteframe>
+
+
+
+</div>
+

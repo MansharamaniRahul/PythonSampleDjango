@@ -1,0 +1,23 @@
+<md-toolbar layout="column" class="md-padding-10" ng-controller='headerController'>
+	<div class="md-toolbar-tools">      
+		<div flex='40' ui-sref="home" >Data Wrangling</div>	
+		<div flex='10'  class="headerButtons ripple " ui-sref="filter" ng-show='taskCreated'>	Filter</div>
+		<div flex='10'  class="headerButtons ripple "  ui-sref="transformation" ng-show='taskCreated'>Transform</div>
+		<div flex='10'  class="headerButtons ripple "  ui-sref="lookup" ng-show='taskCreated'>	Lookup</div>	
+		<div flex='20'  >	
+		<md-button  class="md-warn ripple " ng-click='loadExternalData();'>
+				Load External Data
+			</md-button>
+		</div>					
+		<div flex='10'  >	
+		<md-button  class="md-warn ripple " ng-click='previewData();'>
+				Preview
+			</md-button>
+		</div>					
+		<div flex='10'  >
+			<md-button   class="md-warn ripple " ng-click='saveData();'>
+				Save
+			</md-button>
+		</div>
+	</div>    
+</md-toolbar>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" ng-app="wranglingApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Demo</title>
+
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link  rel="stylesheet" type="text/css"  href="assets/css/app.css"/>    
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- UI Tree --> 
+  <link rel="stylesheet" href='/css-ripple-effect/dist/ripple.css'></link>  
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+  <!--  Local Files References -->
+
+  <!-- Home Controller -->
+  <script type="text/javascript" src='js/controllers/home/homeController.js'></script>
+
+  <!-- Task Operations Controller -->
+  <script type="text/javascript" src='js/controllers/taskOperations/taskOperationsController.js'></script>
+
+  <!-- Create Task Controller -->
+  <script type="text/javascript" src='js/controllers/createtask/createTaskController.js'></script>
+  <script type="text/javascript" src='js/factories/createtask/createTaskFactory.js'></script> 
+  <!-- List Task Controller -->
+  <script type="text/javascript" src='js/controllers/listtask/listTaskController.js'></script>
+  
+  <!-- Header References -->
+  <script type="text/javascript" src='js/controllers/header/headerController.js'></script>
+  <script type="text/javascript" src='js/factories/header/headerFactory.js'></script> 
+
+
+  <!-- Preview References -->
+  <script type="text/javascript" src='js/controllers/preview/previewController.js'></script>
+  <script type="text/javascript" src='js/factories/preview/previewFactory.js'></script>
+
+
+  <!-- Filters References -->
+  <script type="text/javascript" src='js/controllers/filters/filtersController.js'></script>
+  <script type="text/javascript" src='js/factories/filters/filtersFactory.js'></script>
+  <script type="text/javascript" src='js/services/filters/filtersService.js'></script>
+
+  <!-- Look Up References -->
+  <script type="text/javascript" src='js/controllers/lookup/lookupController.js'></script>
+  <script type="text/javascript" src='js/factories/lookup/lookupFactory.js'></script>
+  <script type="text/javascript" src='js/services/lookup/lookupService.js'></script>
+
+  <!-- Transformations References-->
+  <script type="text/javascript" src='js/controllers/transformations/transformationsController.js'></script>
+  <script type="text/javascript" src='js/factories/transformations/transformationsFactory.js'></script>
+  <script type="text/javascript" src='js/services/transformations/transformationService.js'></script>
+
+  <!-- App JS References -->
+  <script src="js/app.js"></script>
+  <!-- Common Services -->
+  <script type="text/javascript" src='js/services/commonServices/commonServices.js'></script>
+  <script type="text/javascript" src='js/factories/commonFactories/commonFactories.js'></script>
+
+
+</head>	
+<body    layout="column" layout-xs='row' ng-cloak >
+  <div class='loadingMask' ng-show='showLoader'>
+    <div class="child">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>  
+  </div>
+  <ng-include src="'../partials/header/header.html'"></ng-include>   
+  <div layout="row" flex layout-wrap >
+    <div ng-controller='indexController' flex='25'>
+      <md-sidenav class="md-sidenav-left" md-component-id="left"
+      md-disable-backdrop  md-whiteframe="4" md-is-open='mdsideNavIsOpen' >
+
+      <md-toolbar class="md-theme-indigo">       
+        <h1 ui-sref="home" class="md-toolbar-tools">Data Wrangling</h1>                
+      </md-toolbar>
+
+      <md-content class='sideNavContent' >   
+
+        <!-- Task List -->
+        <div class='tablesList' >         
+          <div class='ripple nodeElements' layout='row' layout-align='space-between center' >
+            <div ui-sref="taskOperations">Task : {{taskName}}</div>                       
+            <div>
+            <i class='material-icons' ui-sref="taskOperations">domain</i>
+              <i class="material-icons" ng-click='editTaskName(taskName);'>edit</i>              
+            </div>
+          </div> 
+        </div>
+
+        <!-- Selected Table List --> 
+        <div class='selectedTable' ng-if="selectedTable.length>0">
+          <div ng-repeat='tableDetails in selectedTable track by $index'  ng-init='tableDetails.isExpanded="false"'>
+            <div class='ripple nodeElements' layout='row' layout-align='space-between center' ng-click='tableDetails.isExpanded=!tableDetails.isExpanded'>
+              <div style='padding: 5px;'>Table : &nbsp;{{tableDetails.name}}</div>                     
+              <div><i class='material-icons'>swap_vert</i></div>
+            </div> 
+            <div ng-if='!tableDetails.isExpanded' class='childTreeDiv'>
+              <div >
+                <div ng-repeat='columnName in tableDetails.columns track by $index' class='childTreeElements' >
+                 <div class='ripple childElementsText'>{{columnName}}
+                   <md-checkbox ng-model='selectedColumns[columnName]' ng-change='columnSelected();'>
+                   </md-checkbox>
+                 </div>                 
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+       <!-- Filter List -->
+       <div class='filtersList' ng-if='filtersList.length>0' ui-sref="filter">
+        <div ng-init='isExpanded="false"'>
+          <div class='ripple nodeElements' layout='row' layout-align='space-between center' ng-click='isExpanded=!isExpanded'>
+            <div >Filters</div>                     
+            <div><i class='material-icons'>swap_vert</i></div>
+          </div> 
+          <div ng-if='!isExpanded' class='childTreeDiv'>
+            <div >
+              <div ng-repeat='filterDetails in filtersList' class='childTreeElements' >
+               <div class='ripple childElementsText' layout='row' layout-align='space-between center' ng-click='tableDetails.isExpanded=!tableDetails.isExpanded'>              
+                <div >
+                  {{filterDetails.column | limitTo:13}}
+                  <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{filterDetails.column}}</md-tooltip>
+                </div>   
+
+                <div >
+                  {{filterDetails.condition.displayvalue | limitTo:12}}
+                  <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{filterDetails.condition.displayvalue}}</md-tooltip>
+                </div>   
+
+                <div >
+                  {{filterDetails.filterValue | limitTo:2}}
+                  <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{filterDetails.filterValue}}</md-tooltip>
+                </div>                                                    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Lookup List -->
+    <div class='lookupList' ng-if='lookupList.length>0' ui-sref="lookup">
+      <div ng-init='isExpanded="false"'>
+        <div class='ripple nodeElements' layout='row' layout-align='space-between center' ng-click='isExpanded=!isExpanded'>
+          <div >Look Ups</div>                     
+          <div><i class='material-icons'>swap_vert</i></div>
+        </div> 
+        <div ng-if='!isExpanded' class='childTreeDiv'>
+          <div >
+            <div ng-repeat='lookupDetails in lookupList' class='childTreeElements' >
+             <div class='ripple childElementsText' layout='row' layout-align='space-between center' ng-click='lookupDetails.isExpanded=!lookupDetails.isExpanded'>
+              <div >
+                {{lookupDetails.childColumn | limitTo:13}}
+                <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{lookupDetails.childColumn}}</md-tooltip>
+              </div>   
+
+              <div >
+                {{lookupDetails.selectedCondition.name | limitTo:12}}
+                <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{lookupDetails.selectedCondition.name}}</md-tooltip>
+              </div>   
+
+              <div >
+                {{lookupDetails.parentColumn | limitTo:2}}
+                <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{lookupDetails.parentColumn}}</md-tooltip>
+              </div>                          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Transformation List -->
+
+  <div class='lookupList' ng-if='transformationsList.length>0' ui-sref="transformation">
+    <div ng-init='isExpanded="false"'>
+      <div class='ripple nodeElements' layout='row' layout-align='space-between center' ng-click='isExpanded=!isExpanded'>
+        <div >Transformations</div>                     
+        <div><i class='material-icons'>swap_vert</i></div>
+      </div> 
+      <div ng-if='!isExpanded' class='childTreeDiv'>
+        <div >
+          <div ng-repeat='transformationDetails in transformationsList' class='childTreeElements' >
+           <div class='ripple childElementsText' layout='row' layout-align='space-between center' ng-click='transformationDetails.isExpanded=!transformationDetails.isExpanded'>
+             <div >
+              {{transformationDetails.targetColumn | limitTo:15}}
+              <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{transformationDetails.targetColumn}}</md-tooltip>
+            </div>   
+
+            <div >
+              {{transformationDetails.transformationFunction | limitTo:18}}
+              <md-tooltip md-direction="top" class='tootlTipSidePannel'>{{transformationDetails.transformationFunction}}</md-tooltip>
+            </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</md-content>
+
+</md-sidenav>
+</div>
+
+<div flex='75' >
+  <md-content  class='dynamicContent' >
+   <div ui-view></div>    
+ </md-content>
+</div>
+
+
+</div>
+
+
+<ng-include src="'../partials/footer/footer.html'"></ng-include>
+</body>
+</html>

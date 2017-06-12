@@ -1,0 +1,41 @@
+<div layout="row"  >
+	<div flex='40'>
+		<md-input-container>
+			<label>Enter Task Name</label>
+			<input  type="text" ng-model="setTaskDetails.taskName">
+		</md-input-container>
+	</div>
+	<div flex='55'>
+		<md-autocomplete flex    
+		md-selected-item="setTaskDetails.selectedTable"   
+		
+		md-search-text="searchTableName"               
+		md-items="item in querySearchedTableName(searchTableName)"
+		md-item-text="item"
+		md-min-length="1"
+		md-floating-label="Select Table Name">
+		<md-item-template>
+			<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+		</md-item-template>
+		<md-not-found>
+			No states matching "{{searchTableName}}" were found.
+		</md-not-found>
+	</md-autocomplete>
+</div>
+</div>
+<div  layout="row"  >
+	<div flex='45'>
+		<md-dialog-actions>
+			<md-button ng-click="createTask()" class="md-primary">
+				Create Task
+			</md-button>
+		</md-dialog-actions>
+	</div>
+	<div flex='45'>
+		<md-dialog-actions>
+			<md-button ng-click="closeDialog()" class="md-primary">
+				Close Dialog
+			</md-button>
+		</md-dialog-actions>
+	</div>
+</div>

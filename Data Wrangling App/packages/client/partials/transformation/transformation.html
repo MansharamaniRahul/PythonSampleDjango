@@ -1,0 +1,79 @@
+<div layout="column"  id='filters' >
+  <div flex='30'>
+    <h4 class='topicsHeading'>
+      Select Transformation
+    </h4>
+  </div>
+  <div flex='60'>
+    <table  class="table table-striped">
+      <tr>
+        <th>Target Column</th>
+        <th style='width:50px;'>Transformation Function</th>        
+        <th>Add </th>
+        <th>Delete</th>
+        <th>Clear </th>
+      </tr>
+
+      <tr ng-repeat='row in transformationsList track by $index'>
+        <td colspan='5'>
+          <table width='100%'>
+            <tr>
+              <td >
+               <md-input-container >
+                <label>Target Column</label>
+                <input ng-disabled='row.isDisabled' ng-model="row.targetColumn">
+              </md-input-container>
+            </td>
+            <td style='width:50px;'>
+
+              <md-autocomplete 
+              
+              md-menu-class='disable-select'
+              ng-disabled='row.isDisabled'
+              md-selected-item="row.transformationFunction"                            
+              md-search-text="row.searchColumnName"
+              ng-keypress="querySearchedColumnName($event,row)"
+              md-items="item in columnFunctionList"
+              md-item-text="item"             
+              md-min-length="1"
+              md-floating-label="Transformation Function">
+              <md-item-template  >
+                <span  md-highlight-text="ctrl.searchText"  md-highlight-flags="^i">{{item}}</span>
+              </md-item-template>          
+            </md-autocomplete>  
+          </td>           
+          <td >
+            <md-button aria-label="Twitter" class="md-fab md-mini ripple "
+            ng-click='addDeleteRow("add",row)'>
+            <i class="material-icons">add</i>
+          </md-button>
+        </td>
+        <td >
+         <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple "  ng-hide='$index==0'
+         ng-click='addDeleteRow("delete",row)'>
+         <i class="material-icons">delete</i>
+       </md-button>
+     </td>    
+     <td >
+       <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple "
+       ng-click='clearRow(row)'>
+       <i class="material-icons">clear_all</i>
+     </md-button>
+   </td>    
+ </tr>
+ <tr ng-if='row.errorMessage.length>0'>
+  <td class='errorMessage' colspan='5'>{{row.errorMessage}}</td>
+</tr>
+
+</table>
+</td>   
+</tr>
+</table>
+</div>
+<div flex='10'>
+  <md-button  class="md-primary ripple " ng-click='createTransformations();'>
+    Save Transformations
+  </md-button>
+</div>
+</div>
+</div>

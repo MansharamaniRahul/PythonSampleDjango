@@ -1,0 +1,232 @@
+.sideNavContent{
+	background-color: rgb(63,81,181);
+	height:90.5%;
+	max-height: 95%;
+	overflow-y: auto;
+	color: #fff;
+}
+.dynamicContent{
+  height:100%;
+  max-height: 95%;
+  overflow-y: auto;
+  
+}
+.file_input {
+  float: left;
+}
+.nodeElements{
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	padding: 10px !important;
+	margin-left: 8px;	
+}
+.childTreeElements{
+	margin-top: 5px;
+  font-size: 15px;
+}
+.tootlTipSidePannel{
+  font-size: 15px;
+}
+
+.tablesList,.selectedTable,.filtersList,.lookupList{
+	margin-bottom: 10px;
+}
+
+.nodeElements,.childElementsText:hover{
+	background-color:#5265ce;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.childElementsText{
+	padding: 8px;
+	margin-left: 25px;
+}
+
+.topicsHeading{
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 32px;
+	color: rgba(0,0,0,0.87);
+}
+
+.headerButtons{
+  color: rgb(255,87,34);
+  cursor: pointer;
+  line-height: 36px;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 500; 
+  font-size: 14px;
+  font-style: inherit;
+  font-family: inherit;
+  letter-spacing: .01em;
+}
+/*.tableCSS {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+  }*/
+
+  td, th {
+   border-bottom: 1px solid #dddddd;
+   text-align: left;
+   padding: 0px;
+   width: 16.66%;
+ }
+ tr:nth-child(even) {background: #F0F8FF}
+ tr:nth-child(odd) {background: #FFF}
+
+ .errorMessage{
+   color:red;
+   font-size: 15px;
+ }
+
+
+ .md-accordion1{
+  width: 95%;
+  margin-top: 10px;
+  background-color:  #cccccc  ;
+  border-radius: 10px;
+  border-bottom:1px solid rgb(63,107,181)
+}
+
+.demo{
+ color:#098bdc;
+ font-size:15px;
+ letter-spacing: .005em;
+ box-sizing: border-box;
+ font-weight: 400;
+ display: -webkit-box;
+ display: -webkit-flex;
+ display: flex;
+ -webkit-box-align: baseline;
+ -webkit-align-items: baseline;
+ align-items: center;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+ -webkit-flex-direction: row;
+ width: 100%;
+ height: 40px;
+ max-height: 64px;
+ padding: 0 17px;
+}
+.md-accordion1 .expandCollapse { 
+  width:30px;
+  height:30px;
+  position:relative;
+  font-size:20px;
+  
+  cursor:pointer;
+  color:#fff;
+  display:block;
+  margin-top: -2px;
+  margin-left: -2px;
+  overflow:hidden;
+}
+.md-accordion1 .expandCollapse:active {
+  border:0px;
+}
+.md-accordion1 .expandCollapse:before, .md-accordion1 .expandCollapse:after {
+  width:30px;
+  height:30px;
+  display:block;
+  position:absolute;
+  top:0; left:0;
+  line-height:32px;
+  text-align:center;
+  -webkit-transition: .3s all ease-out;
+  transition: .3s all ease-out;
+}
+.md-accordion1 .expandCollapse:before { 
+  opacity:1
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  content: "|";
+  margin-top:-3px;
+}
+.md-accordion1 .expandCollapse:after {
+  opacity:1;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  content: "|";
+  margin-left:-3px;
+}
+.md-accordion1 .active:before {
+  opacity:1;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  margin-left:3px;
+  margin-top:0px;
+}
+
+.md-accordion1 .dataContent {
+  background: #F2F2F2;
+  height:0px;
+  overflow:hidden;
+  -webkit-transition: .3s all ease-out;
+  transition: .3s all ease-out;
+}
+
+.md-accordion1 .activeContent {
+  height:auto;
+  padding:20px;
+  display:block;
+}
+
+.tilesHomePage{
+  padding-top: 20%;
+  padding-right: 30%; 
+}
+.tilesTaskOpertns{
+  padding-top: 20%;
+  padding-right: 20%; 
+}
+
+md-whiteframe {
+  margin: 25px;
+  height: 100px;
+}
+md-whiteframe:hover{
+  background-color: #e5e5e5;
+}
+md-whiteframe > span {
+  font-size: 1.0em; } 
+
+  .box{
+   color:#928F8E;
+   transition: box-shadow 0.5s;
+   text-align: center;
+ }
+ .box:hover{
+   color:#1527D5;
+   box-shadow: 10px 10px 3px grey;
+
+ }
+
+ .disable-select {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+  pointer-events: none;
+}
+
+
+.loadingMask{
+  z-index: 1000;
+  position: absolute;  
+  opacity: 0.5;
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingMask .child{
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+md-checkbox{
+  float:right;
+}

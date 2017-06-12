@@ -1,0 +1,142 @@
+<div layout="column"  id='lookups' >
+	<div flex='30'>
+		<h4 class='topicsHeading'>
+			LooK Up Table : {{lookupTableSelected}}
+      <!--     <i class="material-icons" ng-click='editLookUpTable();'>edit</i>   -->
+    </h4>
+
+  </div>
+  <div flex='60'>
+    <table  class="table table-striped">
+      <tr>
+       <th> Select Lookup Table</th>
+       <th>Parent Column</th>
+       <th>Condition</th>
+       <th>Child Columns</th>
+       <th>Add Lookup</th>
+       <th>Delete Lookup</th>
+       <th>Clear Lookup</th>       
+     </tr>
+
+     <tr ng-repeat='row in lookupList track by $index'>
+      <td colspan='7'>
+        <table width='100%'>  
+          <tr>
+            <td>
+             <md-autocomplete     
+
+             md-selected-item="row.parentTable"        
+             md-selected-item-change='parentTableSelected(row,row.parentTable);'
+
+             md-search-text="searchParentTable"            
+             md-items="item in querySearchedTableName(searchParentTable)"
+             md-item-text="item.name"
+             md-min-length="1"
+             md-floating-label="Select Parent Table">
+             <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+            </md-item-template>
+            <md-not-found>
+              No states matching "{{searchParentTable}}" were found.
+            </md-not-found>
+          </md-autocomplete>
+            <!--  <md-input-container>
+               <label>Lookup Table</label>
+               <input  type="text" ng-model="row.parentTable">
+             </md-input-container>
+             <i class="material-icons" ng-click='selectLookup(row);'>edit</i>   -->          
+           </td>
+           <td >
+             <md-autocomplete flex    
+             ng-disabled='row.isDisabled'   
+             md-selected-item="row.parentColumn"  
+             md-selected-item-change='columnSelected(row,"parent");'      
+             md-search-text="row.searchParentColumnName"                
+             md-items="item in querySearch(row,'parentTable')" 
+             md-item-text="item"
+             md-min-length="1"
+             md-floating-label="Select Column">
+             <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+            </md-item-template>
+            <md-not-found>
+              No states matching "{{row.searchColumnName}}" were found.
+            </md-not-found>
+          </md-autocomplete>
+
+        </td>
+        <td >
+          <md-autocomplete flex    
+          ng-disabled='row.isDisabled'     
+          md-selected-item="row.selectedCondition"        
+          md-search-text="row.searchCondition"            
+          md-items="item in querySearch(row,'conditionTable')"
+          md-item-text="item.name"
+          md-min-length="1"
+          md-floating-label="Select Condition">
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No states matching "{{row.selectedCondition}}" were found.
+          </md-not-found>
+        </md-autocomplete>
+      </td>
+      <td >
+        <md-autocomplete flex    
+        ng-disabled='row.isDisabled' 
+        md-selected-item-change='columnSelected(row,"child");'  
+        md-selected-item="row.childColumn"        
+        md-search-text="row.searchColumnNameFromChild"                
+        md-items="item in querySearch(row,'childTable')" 
+        md-item-text="item"
+        md-min-length="1"
+        md-floating-label="Select Column">
+        <md-item-template>
+          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+        </md-item-template>
+        <md-not-found>
+          No states matching "{{row.searchColumnNameFromChild}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+
+    </td>
+
+    <td >
+      <md-button aria-label="Twitter" class="md-fab md-mini ripple "
+      ng-click='addDeleteRow("add",row)'>
+      <i class="material-icons">add</i>
+    </md-button>
+  </td>
+  <td >
+   <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple "  ng-hide='$index==0'
+   ng-click='addDeleteRow("delete",row)'>
+   <i class="material-icons">delete</i>
+ </md-button>
+</td>    
+<td >
+ <md-button aria-label="Twitter" class="md-fab md-warn md-mini ripple "
+ ng-click='clearRow(row)'>
+ <i class="material-icons">clear_all</i>
+</md-button>
+</td>    
+</tr>
+<tr ng-if='row.errorMessage.length>0'>
+  <td class='errorMessage' colspan='7'>{{row.errorMessage}}</td>
+</tr>
+
+</table>
+</td>   
+</tr>
+</table>
+</div>
+<div flex='10'>
+  <md-button  class="md-primary ripple " ng-click='createLookups();'>
+   Save Lookups
+ </md-button>
+</div>
+</div>
+</div>
+
+
+

@@ -1,0 +1,18 @@
+<md-dialog style='padding: 5px;'>
+  <md-dialog-content>
+  <div style='padding: 5px;'>name : {{dialogData.currChip.name}}</div>
+  <div style='padding: 5px;'>Purpose : {{dialogData.currChip.purpose}}</div>
+  <div style='padding: 5px;'>Return Type : {{dialogData.currChip.returnType}}</div>  
+  <div style='padding: 5px;'>Syntax: {{dialogData.currChip.syntax}}</div>
+  <div style='padding: 5px;'>Usage Notes : {{dialogData.currChip.usageNotes}}</div>
+</md-dialog-content>
+<md-dialog-actions>
+<md-button style='padding: 5px;' ng-click="addTransformation()" class="md-primary">
+   Add Transformation
+ </md-button>
+ <md-button ng-click="closeDialog()" class="md-primary">
+   Close Dialog
+ </md-button>
+</md-dialog-actions>
+</md-dialog>
+

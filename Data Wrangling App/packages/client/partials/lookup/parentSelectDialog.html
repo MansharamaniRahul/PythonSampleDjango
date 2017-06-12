@@ -1,0 +1,27 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+   <md-autocomplete     
+   
+   md-selected-item="selectedTable"        
+   md-selected-item-change='parentTableSelected(selectedTable);closeDialog();'
+
+   md-search-text="searchParentTable"            
+   md-items="item in querySearchedTableName(searchParentTable)"
+   md-item-text="item.name"
+   md-min-length="1"
+   md-floating-label="Select Parent Table">
+   <md-item-template>
+    <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+  </md-item-template>
+  <md-not-found>
+    No states matching "{{searchParentTable}}" were found.
+  </md-not-found>
+</md-autocomplete>
+
+
+
+</md-dialog-content>
+<md-dialog-actions>
+	<md-button ng-click="closeDialog()" class="md-primary"> Close Dialog </md-button>
+</md-dialog-actions>
+</md-dialog>
